@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Category(models.Model):
     title = models.CharField(null=False, blank=False, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,8 +32,6 @@ class Order(models.Model):
     address = models.CharField(null=False, blank=False, max_length=250)
     customer = models.ForeignKey(Customer, blank=True, null=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
-
-
 
 class OrderProduct(models.Model):
     count = models.IntegerField(null=False, blank=False)

@@ -206,7 +206,8 @@
             <form id="second_form" class="account" method="post">
                 {% csrf_token %}
                 <div class="phone">
-                    <p> ВЕРИФИКАЦИЯ ТЕЛЕФОНА*</p><br>
+                    <p> ВЕРИФИКАЦИЯ ТЕЛЕФОНА*</p>
+                    <p>Образец:(998902005400)</p><br>
                     <input class="input" id="number-id" type="text" name="phone_number" placeholder="Ваш номер" onchange="validate()">
                 </div>
                 <div id="second_div" style="visibility: hidden">
@@ -240,7 +241,8 @@
 
                     <div class="div">
                         <p>«Адрес, Ориентир»*</p>
-                        <textarea class="text" name="address" id="" cols="30" rows="10"></textarea>
+                        <textarea class="text" name="address" id="" cols="20" rows="auto"></textarea>
+                        
 
                     </div>
 
@@ -331,7 +333,7 @@
             node.innerHTML = "";
         }
 
-        <!--next-->
+        // next
         function getCookie(name) {
             var nameEQ = name + "=";
             var ca = document.cookie.split(';');

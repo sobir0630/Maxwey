@@ -15,7 +15,9 @@
                     <div class="col-md-12">
                         <div class="overview-wrap">
                             <h2 class="title-1">Order List</h2>
-
+                        </div>
+                        <div  class="overview-wrap">
+                            {% comment %} <button class="btn btn-danger zmdi zmdi-minus" data-toggle="tooltip" href="{% url 'order_delete' %}">all delete</button> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -33,6 +35,11 @@
                                         <th>Payment type</th>
                                         <th>Created at</th>
                                         <th>Cart</th>
+                                        <th>
+                                            <a>
+                                                <em class="btn btn-danger" data-placement="top" href="{% url 'order_all_delete' %}">all</em>
+                                            </a>
+                                        </th>
 
 
                                     </tr>
@@ -46,7 +53,8 @@
                                         <td>{{ order.address }}</td>
                                         <td>{% if order.payment_type == 1 %}naqd{% else %}karta{% endif %}</td>
                                         <td>{{ order.created_at }}</td>
-                                        <td><a href="{% url 'orderproduct_list' id=order.id %}"><i class="fas fa-eye fa-lg" style="color:grey"></i></a></td>
+                                        <td><a href="{% url 'orderproduct_list' id=order.id %}"><i class="fas fa-eye fa-lg" style="color:green"></i></a></td>
+                                        <td><a href="{% url 'order_delete' id=order.id %}" data-placement="top"><i class="zmdi zmdi-delete text-danger" style="color:green">delete</i></a></td>
 
 
 

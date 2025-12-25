@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from food.models import *
 from django.contrib.auth import login, logout,authenticate
 from django.contrib.auth.decorators import login_required
@@ -45,10 +46,12 @@ def login_page(request):
         username =request.POST.get("username",None)
         password = request.POST.get("password", None)
         user = authenticate(username=username, password=password)
+        
         if user is not None:
             login(request, user)
             return redirect('main_dashboard')
     return render(request,'dashboard/login.html')
+
 
 @login_required_decarator
 def logout_page(request):
@@ -187,7 +190,7 @@ def product_edit(request,pk):
 def product_delete(request,pk):
     model = Product.objects.get(pk=pk)
     model.delete()
-    return  redirect("product_list")
+    return redirect("product_list")
 
 @login_required_decarator
 def customer_order_list(request,id):
@@ -204,3 +207,13 @@ def orderproduct_list(request,id):
         'productorders': productorders
     }
     return render(request, "dashboard/productorder/list.html", ctx)
+
+def orderproduct_delete(request, id):
+    model = Order.objects.get(id=id)
+    model.delete()
+    return render(request, "dashboard/order/list.html")
+
+def order_all_delete(request, id):
+    models = OrderProduct.objects.all()
+    models.delete()
+    return render(request, "dashboard/order/list.html")
