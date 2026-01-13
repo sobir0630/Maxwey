@@ -27,5 +27,6 @@ urlpatterns = [
 
     path('orderproduct/<int:id>/list/', orderproduct_list, name="orderproduct_list"),
     path('orederdelete/<int:id>/delete/', orderproduct_delete, name="order_delete"),
-    path('orderdelete/delete/', order_all_delete, name="order_all_delete")
+    path('orderdelete/delete/', order_all_delete, name="order_all_delete"),
+    path('ordersignals/<int:id>/send-signal/', send_signal, name="send_signal"),
 ]

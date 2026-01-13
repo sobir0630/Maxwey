@@ -29,7 +29,7 @@ def index(request):
         for key, val in json.loads(orders_list).items():
             orders.append(
                 {
-                "product": Product.objects.get(pk=int(key)),
+                "product": Product.objects.filter(pk=int(key)).first(),
                 "count": val
                 }
             )

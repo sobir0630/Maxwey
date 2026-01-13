@@ -1,0 +1,94 @@
+<!-- dashboard/templates/dashboard/productorder/signal.html -->
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Buyurtma Tasdiqlash</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 20px;
+        }
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .info {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Buyurtma Ma’lumotlari</h1>
+
+    <div class="info"><strong>ID:</strong> {{ order.id }}</div>
+    <div class="info"><strong>Mijoz:</strong> {{ order.customer.first_name }} {{ order.customer.last_name }}</div>
+    <div class="info"><strong>Telefon:</strong> {{ order.customer.phone_number }}</div>
+    <div class="info"><strong>Manzil:</strong> {{ order.address }}</div>
+    <div class="info"><strong>Status:</strong> {% if order.status == 1 %}bazada bor{% else %}bazada yuq{% endif %}</div>
+{% for ord in order_prod %}
+    <div class="info"><strong>Mahsulot:</strong> {{ ord.title }}</div>
+{% endfor %}
+    <div class="info"><strong>Buyurtma soni:</strong> {{ order_product.count }} dona</div>
+    <div class="info"><strong>Umumiy summa:</strong> {{ order_product.price }}</div>
+    <div class="info"><strong>To'lov turi:</strong> {% if order.payment_type == 1 %}naqd{% else %}karta{% endif %}</div>
+    <div class="info"><strong>Buyirtma vaqti:</strong> 
+                        {% with hour=order.created_at.hour %}
+                            {{ order.created_at|date:"M. d, Y, g:i" }}
+                            (
+                            {% if hour >= 6 and hour < 18 %}
+                                Kunduzi
+                            {% else %}
+                                Kechasi
+                            {% endif %}
+                            )
+                        {% endwith %}
+    </div>
+
+
+    <form method="post" action="{% url 'send_signal' order.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Tasdiqlash va Telegramga yuborish</button>
+        {% if sent %}
+        <div>
+            <h1>Yuborildi...</h1>
+        </div>
+        <script>
+            // 3 soniyadan keyin avtomatik product sahifaga o'tish
+            setTimeout(function() {
+                window.location.href = "{% url 'order_list' %}";
+            }, 3000);
+        </script>
+        {% endif %}
+    </form>
+</div>
+
+</body>
+</html>

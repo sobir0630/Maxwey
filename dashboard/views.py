@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from food.models import *
 from django.contrib.auth import login, logout,authenticate
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from . import forms
 from . import services
+from .signals import send_signall
+from .models import OrderSendSignal, Customer
 
 def login_required_decarator(func):
     return login_required(func, login_url='login_page')
@@ -99,7 +100,7 @@ def user_create(request):
 @login_required_decarator
 def user_edit(request, pk):
     model = Customer.objects.get(pk=pk)
-    form = forms.UserForm(request.POST or None, instance=model)
+    form = forms.UserForm(request.POST, instance=model)
 
     if request.POST and form.is_valid():
         form.save()
@@ -201,10 +202,10 @@ def customer_order_list(request,id):
     return render(request, "dashboard/customer_order/list.html", ctx)
 
 @login_required_decarator
-def orderproduct_list(request,id):
+def orderproduct_list(request, id):
     productorders = services.get_product_by_order(id=id)
     ctx = {
-        'productorders': productorders
+        'productorders': productorders,
     }
     return render(request, "dashboard/productorder/list.html", ctx)
 
@@ -217,3 +218,25 @@ def order_all_delete(request, id):
     models = OrderProduct.objects.all()
     models.delete()
     return render(request, "dashboard/order/list.html")
+
+@login_required_decarator
+def send_signal(request, id):
+    order = get_object_or_404(Order, id=id)
+    order_product = OrderProduct.objects.filter(order=order).first()
+    productorders = OrderProduct.objects.filter(order=order)
+
+    if request.method == "POST":
+        send_signall(sender=Order, instance=order, order_product=order_product, created=True)
+        return render(request, "dashboard/productorder/signal.html", {
+            "order": order,
+            "order_product": order_product,
+            "order_prod": productorders,
+            "sent": True
+        })
+        return redirect('orderproduct_list')
+
+    return render(request, "dashboard/productorder/signal.html", {
+        "order": order,
+        "order_product": order_product,
+        "order_prod": productorders
+    })
