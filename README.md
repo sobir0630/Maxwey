@@ -1,8 +1,8 @@
-🍔 MaxWay – Online Ovqat Buyurtma Platformasi
+# 🍔 MaxWay – Online Ovqat Buyurtma Platformasi
 
-MaxWay — bu restoran va fast-food bizneslari uchun ishlab chiqilgan zamonaviy onlayn ovqat buyurtma qilish tizimi. Loyiha foydalanuvchilar uchun chiroyli va qulay interfeys, administratorlar uchun esa keng funksiyali dashboard taqdim etadi. Barcha buyurtmalar Telegram bot orqali real-time tarzda adminlarga yetkaziladi.
+## MaxWay — bu restoran va fast-food bizneslari uchun ishlab chiqilgan zamonaviy onlayn ovqat buyurtma qilish tizimi. Loyiha foydalanuvchilar uchun chiroyli va qulay interfeys, administratorlar uchun esa keng funksiyali dashboard taqdim etadi. Barcha buyurtmalar Telegram bot orqali real-time tarzda adminlarga yetkaziladi.
 
-🎯 Loyihaning maqsadi
+## 🎯 Loyihaning maqsadi
 
 Mijozlarga ovqatlarni tez va oson buyurtma qilish imkonini berish
 
@@ -12,7 +12,7 @@ Buyurtmalarni Telegram orqali darhol xabardor qilish
 
 Restoran ish jarayonini avtomatlashtirish
 
-🚀 Asosiy imkoniyatlar
+## 🚀 Asosiy imkoniyatlar
 👤 Foydalanuvchilar uchun
 
 🍕 Ovqatlar va kategoriyalarni ko‘rish
@@ -47,8 +47,8 @@ Restoran ish jarayonini avtomatlashtirish
 
 🧑‍🍳 Adminlar tezkor xabardor bo‘ladi
 
-🛠 Texnologiyalar
-
+## 🛠 Texnologiyalar
+```
 Backend: Django
 
 Frontend: HTML, CSS, JavaScript (zamonaviy UI)
@@ -58,8 +58,9 @@ Ma’lumotlar bazasi: PostgreSQL
 Admin Panel: Django Admin + Custom Dashboard
 
 Xabarnoma: Telegram Bot API
-
-📂 Loyiha tuzilishi
+```
+## 📂 Loyiha tuzilishi
+```
 maxway/
 ├── config/
 ├── dashboard/
@@ -73,6 +74,7 @@ maxway/
 ├── config/            # Sozlamalar
 ├── manage.py
 └── requirements.txt
+```
 
 ⚙️ O‘rnatish
 1. Repozitoriyani klonlash
