@@ -76,7 +76,7 @@ maxway/
 
 ⚙️ O‘rnatish
 1. Repozitoriyani klonlash
-git clone https://github.com/username/maxway.git
+git clone https://github.com/sobir0630/maxway.git
 cd maxway
 
 2. Virtual muhit
